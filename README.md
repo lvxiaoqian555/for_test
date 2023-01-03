@@ -1,3 +1,5 @@
+test push
+
 # Rustup: the Rust toolchain installer
 
 | Master CI    | Build Status                                             |
