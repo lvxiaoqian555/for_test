@@ -1,39 +1,3 @@
-node ("x86_runner2"){
-    stage('Cleanup'){
-		sh'''#!/bin/bash
-			rm -rf $HOME/RUST_BUILD_JOB
-		'''
-        cleanWs()
-    }
-    stage('60s Sleep'){
-        sleep(time:60, unit:'SECONDS')
-    }
-    stage('Checkout x86'){
-        checkout scm
-    }
-    stage('Build x86'){
-        sh'''
-            mkdir -p ~/RUST_BUILD_JOB
-            export RUSTUP_HOME=$HOME/RUST_BUILD_JOB
-            export CARGO_HOME=$HOME/RUST_BUILD_JOB
-            sh rustup-init.sh -y
-        '''
-    }
-    stage ('Add RISC-V x86'){
-        sh'''#!/bin/bash
-            export RUSTUP_HOME=$HOME/RUST_BUILD_JOB
-            export CARGO_HOME=$HOME/RUST_BUILD_JOB
-            export PATH="$PATH:$HOME/RUST_BUILD_JOB/bin"
-            rustup target add arm-linux-androideabi
-        '''
-    }
-    stage('Cleanup'){
-		sh'''#!/bin/bash
-			rm -rf $HOME/RUST_BUILD_JOB
-		'''
-        cleanWs()
-    }
-}
 node ("riscv64_runner1"){
     stage('Cleanup'){
 		sh'''#!/bin/bash
