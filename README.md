@@ -1,4 +1,4 @@
-edit fourth times
+edit sixth times
 
 # Rustup: the Rust toolchain installer
 
