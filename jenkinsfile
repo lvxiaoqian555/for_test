@@ -14,8 +14,14 @@ node ("riscv64_runner1"){
     stage('install dependence'){
         sh'''
             bash dep_install.sh > log.txt
-			cat log.txt
-			echo "new"
+            cat log.txt
+            echo "new"
+        '''
+    }
+	stage('run test'){
+        sh'''
+            python3 mugen_riscv.py -f smoke-module > log.txt
+            cat log.txt
         '''
     }
     stage('Cleanup'){
