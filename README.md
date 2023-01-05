@@ -1,5 +1,6 @@
 edit seventh times
 
+
 # Rustup: the Rust toolchain installer
 
 | Master CI    | Build Status                                             |
