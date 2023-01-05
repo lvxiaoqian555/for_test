@@ -13,7 +13,8 @@ node ("riscv64_runner1"){
     }
     stage('install dependence'){
         sh'''
-            bash dep_install.sh
+            bash dep_install.sh > log.txt
+			cat log.txt
         '''
     }
     stage('Cleanup'){
