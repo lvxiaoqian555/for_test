@@ -1,0 +1,25 @@
+node ("riscv64_runner1"){
+    stage('Cleanup'){
+		sh'''#!/bin/bash
+			rm -rf $HOME/for_test
+		'''
+        cleanWs()
+    }
+    stage('60s Sleep'){
+        sleep(time:60, unit:'SECONDS')
+    }
+    stage('Checkout QEMU Linux'){
+        checkout scm
+    }
+    stage('install dependence'){
+        sh'''
+            bash dep_install.sh
+        '''
+    }
+    stage('Cleanup'){
+		sh'''#!/bin/bash
+			rm -rf $HOME/for_test
+		'''
+        cleanWs()
+    }
+}
