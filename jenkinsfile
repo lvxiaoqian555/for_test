@@ -15,6 +15,7 @@ node ("riscv64_runner1"){
         sh'''
             bash dep_install.sh > log.txt
 			cat log.txt
+			echo "new"
         '''
     }
     stage('Cleanup'){
