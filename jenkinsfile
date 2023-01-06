@@ -22,7 +22,7 @@ node ("riscv64_runner1"){
         sh'''
             python3 mugen_riscv.py -f smoke-module > log.txt
             cat log.txt
-            if [ `grep -c "failed 0 cases" log.txt` -e '0' ];then
+            if [ `grep -c "failed 0 cases" log.txt` -ne '1' ];then
                 echo "test has fail!"
                 exit -2
             fi
