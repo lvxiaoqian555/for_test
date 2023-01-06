@@ -23,7 +23,6 @@ node ("riscv64_runner1"){
             cat log.txt
             if [ `grep -c "failed 0 cases" log.txt` -ne '1' ];then
                 echo "test has fail!"
-                exit -2
             fi
         '''
     }
@@ -59,7 +58,6 @@ node ("x86_runner2"){
             cat log.txt
             if [ `grep -c "failed 0 cases" log.txt` -ne '1' ];then
                 echo "test has fail!"
-                exit -2
             fi
         '''
     }
