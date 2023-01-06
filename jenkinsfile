@@ -8,19 +8,54 @@ node ("riscv64_runner1"){
     stage('60s Sleep'){
         sleep(time:60, unit:'SECONDS')
     }
-    stage('Checkout QEMU Linux'){
+    stage('Checkout mugen'){
         checkout scm
     }
     stage('install dependence'){
         sh'''
             bash dep_install.sh > log.txt
             cat log.txt
-            echo "new"
         '''
     }
 	stage('run test'){
         sh'''
             python3 mugen_riscv.py -f smoke-module > log.txt
+            cat log.txt
+            if [ `grep -c "failed 0 cases" log.txt` -ne '1' ];then
+                echo "test has fail!"
+                exit -2
+            fi
+        '''
+    }
+    stage('Cleanup'){
+		sh'''#!/bin/bash
+			rm -rf $HOME/for_test
+		'''
+        cleanWs()
+    }
+}
+node ("x86_runner2"){
+    stage('Cleanup'){
+		sh'''#!/bin/bash
+			rm -rf $HOME/for_test
+		'''
+        cleanWs()
+    }
+    stage('60s Sleep'){
+        sleep(time:60, unit:'SECONDS')
+    }
+    stage('Checkout mugen'){
+        checkout scm
+    }
+    stage('install dependence'){
+        sh'''
+            bash dep_install.sh > log.txt
+            cat log.txt
+        '''
+    }
+	stage('run test'){
+        sh'''
+            bash mugen.sh -f smoke-module > log.txt
             cat log.txt
             if [ `grep -c "failed 0 cases" log.txt` -ne '1' ];then
                 echo "test has fail!"
