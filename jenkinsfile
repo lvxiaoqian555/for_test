@@ -33,7 +33,7 @@ node ("riscv64_runner1"){
         cleanWs()
     }
 }
-node ("x86_runner2"){
+node ("x86_runner1"){
     stage('Cleanup'){
 		sh'''#!/bin/bash
 			rm -rf $HOME/for_test
